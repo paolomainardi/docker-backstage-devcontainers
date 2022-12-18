@@ -159,3 +159,59 @@ Using or not the named volume must be controlled with `.env` variables:
 # COMPOSE_FILE=docker-compose.yml:docker-compose-volumes.yml
 COMPOSE_PROFILES=app
 ```
+
+## Run it
+
+### All bind mounted
+
+Just keep `.env`:
+
+```shell
+# COMPOSE_FILE=docker-compose.yml:docker-compose-volumes.yml
+COMPOSE_PROFILES=app
+```
+
+And run:
+
+```shell
+> docker-compose up -d
+> make cli
+```
+
+### Local: Bind mount + named volume
+
+Change `.env` to:
+
+```shell
+COMPOSE_FILE=docker-compose.yml:docker-compose-volumes.yml
+COMPOSE_PROFILES=app
+```
+
+And run:
+
+```shell
+> docker-compose up -d
+> make cli
+```
+
+### Devcontainers: Bind mount + named volume
+
+Change `.env` to:
+
+```shell
+COMPOSE_FILE=docker-compose.yml:docker-compose-volumes.yml
+COMPOSE_PROFILES=app
+```
+
+Now open the VSCode command palette and run:
+`Dev Containers: Rebuild and Reopen in Containers`
+
+At this point you'll have a working instance of VSCode
+configured with the devcontainers, just open a terminal and run:
+
+```shell
+> docker-compose up -d
+```
+
+Yes, thanks to the extension installed, we can use docker as
+we do in the host.
