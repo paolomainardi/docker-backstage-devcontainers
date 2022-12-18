@@ -1,0 +1,46 @@
+version: "3"
+services:
+  cli:
+    build:
+      context: .
+      dockerfile: build/node/Dockerfile
+      target: cli
+    profiles: ["cli"]
+    env_file:
+      - app.env
+    volumes:
+      - $PWD:$PWD
+      - ./.cache/yarn:/usr/local/share/.cache/yarn
+      - ./.cache/npm:/root/.npm
+      - ./.cache/dotfiles:/dotfiles
+    user: node
+    hostname: cli
+    working_dir: $PWD
+    command: /bin/sh -c "while sleep 1000; do :; done"
+
+  app:
+    build:
+      context: .
+      dockerfile: build/node/Dockerfile
+      target: run
+    env_file:
+      - app.env
+    volumes:
+      - ./src/backstage/:/usr/src/app
+      - ./.cache/yarn:/usr/local/share/.cache/yarn
+      - ./.cache/npm:/root/.npm
+    profiles: ["app"]
+    ports:
+      - 3000:3000
+      - 7007:7007
+    user: node
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13.3
+    volumes:
+      - ./database:/usr/src/app
+    profiles: ["app"]
+    env_file:
+      - app.env

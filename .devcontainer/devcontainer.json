@@ -1,0 +1,31 @@
+{
+  "name": "Backstage",
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "../docker-compose-volumes.yml"
+  ],
+  "service": "cli",
+  "workspaceFolder": "${localWorkspaceFolder}",
+  "shutdownAction": "stopCompose",
+  "userEnvProbe": "loginInteractiveShell",
+  "remoteUser": "node",
+  // "postCreateCommand": "sudo chown node src/backstage/node_modules",
+  "runServices": ["cli"],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-vsliveshare.vsliveshare",
+        "eamodio.gitlens"
+      ]
+    }
+  },
+  // This is useful to have docker and docker-compose working inside the container
+  // Ref: https://github.com/devcontainers/features/tree/main/src/docker-from-docker
+  "features": {
+    "ghcr.io/devcontainers/features/docker-from-docker:1": {
+      "dockerDashComposeVersion": "v2"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+app:
+  title: Scaffolded Backstage App
+  baseUrl: http://0.0.0.0:3000
+backend:
+  baseUrl: http://127.0.0.1:7007
+  listen:
+    port: 7007
+  csp:
+    connect-src: ["'self'", 'http:', 'https:']
+  cors:
+    origin: http://127.0.0.1:3000
+    methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
+    credentials: true
+  database:
+    client: pg
+    connection:
+      host: ${POSTGRES_HOST}
+      port: ${POSTGRES_PORT}
+      user: ${POSTGRES_USER}
+      password: ${POSTGRES_PASSWORD}
+  cache:
+    store: memory

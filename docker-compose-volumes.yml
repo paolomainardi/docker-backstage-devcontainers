@@ -1,0 +1,11 @@
+version: "3"
+services:
+  cli:
+    volumes:
+      # @TODO - Hardcoded src/backstage path must be a variables.
+      - node_modules:$PWD/src/backstage/node_modules
+  app:
+    volumes:
+      - node_modules:/usr/src/app/node_modules
+volumes:
+  node_modules:
